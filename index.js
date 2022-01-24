@@ -27,7 +27,7 @@ app.get('/', async (req, res) => {
     res.end()
   } else {
     res.status(408)
-    res.error('request timed out')
+    res.send(data)
     res.end()
   }
 })
@@ -39,7 +39,7 @@ app.listen(PORT, () => {
 function getTestInfo(url) {
 
   if(!url.includes(basePath)) {
-    reject('not a vodafone site')
+    return 'not a vodafone site'
   }
 
   const options = {
