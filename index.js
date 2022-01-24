@@ -15,7 +15,8 @@ app.get('/', async (req, res) => {
     res.status(404)
     res.write('not found')
     res.end()
-  }
+    return
+  } 
   const data = await getTestInfo(`${basePath}${req.query.href}`)
   if(Array.isArray(data)) {
     const processedData = data.reduce((acc, curr) => {
