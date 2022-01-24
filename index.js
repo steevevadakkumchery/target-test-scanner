@@ -1,3 +1,4 @@
+const e = require('express')
 const express = require('express')
 const { JSDOM } = require('jsdom')
 
@@ -10,6 +11,11 @@ app.use(express.json())
 
 app.get('/', async (req, res) => {
   console.log('Request Id:', req.query.href);
+  if(!req.query.href) {
+    res.status(404)
+    res.write('not found')
+    res.end()
+  }
   const data = await getTestInfo(`${basePath}${req.query.href}`)
   if(Array.isArray(data)) {
     const processedData = data.reduce((acc, curr) => {
@@ -18,10 +24,11 @@ app.get('/', async (req, res) => {
     res.status(200)
     res.json(processedData)
     res.end()
+  } else {
+    res.status(408)
+    res.error('request timed out')
+    res.end()
   }
-  res.status(408)
-  res.write('request timed out')
-  res.end()
 })
 
 app.listen(PORT, () => {
@@ -44,7 +51,7 @@ function getTestInfo(url) {
         } else {
           if(counter > 20) {
             clearTimeout(timer)
-            reject(new Error('timed out'))
+            reject('timed out')
           }
           counter++
         }
