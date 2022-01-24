@@ -17,7 +17,7 @@ app.get('/', async (req, res) => {
     res.end()
     return
   } 
-  const data = await getTestInfo(`${basePath}${req.query.href}`)
+  const data = await getTestInfo(req.query.href)
   if(Array.isArray(data)) {
     const processedData = data.reduce((acc, curr) => {
       return [ ...acc, {testName: curr.CampaignName} ]
@@ -37,6 +37,11 @@ app.listen(PORT, () => {
 })
 
 function getTestInfo(url) {
+
+  if(!url.includes(basePath)) {
+    reject('not a vodafone site')
+  }
+
   const options = {
     runScripts: "dangerously",
     resources: "usable"
