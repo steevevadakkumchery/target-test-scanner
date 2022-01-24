@@ -5,6 +5,12 @@
   "main": "index.js",
   "author": "steeve vadakkumchery",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "16.13.2"
+  },
   "dependencies": {
     "express": "^4.17.2",
     "jsdom": "^19.0.0"
