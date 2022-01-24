@@ -1,0 +1,13 @@
+{
+  "name": "target-test-scanner",
+  "version": "1.0.0",
+  "description": "web scraper to find which target tests are running",
+  "main": "index.js",
+  "author": "steeve vadakkumchery",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "express": "^4.17.2",
+    "jsdom": "^19.0.0"
+  }
+}
